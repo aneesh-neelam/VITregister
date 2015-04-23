@@ -28,4 +28,13 @@
     <string name="label_register_no">Registration Number</string>
     <string name="label_register">Register</string>
     <string name="hint_register_no">15XXX0000</string>
+
+    <!-- FingerprintFragment -->
+    <string name="title_activity_register">Registering Student</string>
+    <string name="label_fingerprint">Get Fingerprint</string>
+    <string name="press_finger">Press finger</string>
+    <string name="press_finger_again">Press finger again</string>
+    <string name="fingerprint_success">Fingerprint characteristics successfully generated</string>
+    <string name="fingerprint_processing">Processing Fingerprint, please wait&#8230;</string>
+    <string name="fingerprint_fail">Fingerprint registration failed</string>
 </resources>

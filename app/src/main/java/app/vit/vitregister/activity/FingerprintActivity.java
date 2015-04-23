@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.vit.vitregister.MainApplication;
 import app.vit.vitregister.R;
-import app.vit.vitregister.fragment.MainFragment;
+import app.vit.vitregister.fragment.FingerprintFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class FingerprintActivity extends AppCompatActivity {
 
     private MainApplication application;
 
@@ -23,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, BluetoothActivity.class));
         }
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fingerprint);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainFragment())
+                    .add(R.id.container, new FingerprintFragment())
                     .commit();
         }
     }
+
 }

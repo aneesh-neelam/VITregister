@@ -1,6 +1,5 @@
 package app.vit.vitregister.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -9,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +18,8 @@ import app.vit.vitregister.R;
 import app.vit.vitregister.corewise.logic.BluetoothChatService;
 import app.vit.vitregister.corewise.utils.ToastUtil;
 
-public class BluetoothActivity extends Activity {
+public class BluetoothActivity extends AppCompatActivity {
+
     private MainApplication application;
     public static final String CONNECT_RESULT = "connect_result";
     private static final int REQUEST_CONNECT_DEVICE = 1;
