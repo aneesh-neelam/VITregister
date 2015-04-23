@@ -10,13 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_bluetooth_device"
-        android:textSize="20sp" />
+        android:textAlignment="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/connectBluetooth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="@string/connect_bluetooth" />
 
 </LinearLayout>
