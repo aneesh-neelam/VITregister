@@ -1,19 +1,22 @@
 package app.vit.vitregister.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import app.vit.vitregister.MainApplication;
 import app.vit.vitregister.R;
-import app.vit.vitregister.activity.BluetoothActivity;
+import app.vit.vitregister.corewise.utils.ToastUtil;
 
 public class MainFragment extends Fragment {
 
     private MainApplication application;
+    private View rootView;
+    private String registerNumber;
 
     public MainFragment() {
     }
@@ -21,15 +24,24 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        initData();
+        return rootView;
+    }
 
+    private void initData() {
         application = (MainApplication) getActivity().getApplicationContext();
 
-        if (!application.isConnect()) {
-            startActivity(new Intent(getActivity(), BluetoothActivity.class));
-        }
+        Button button = (Button) rootView.findViewById(R.id.register_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText registerNoEditText = (EditText) rootView.findViewById(R.id.register_no);
+                registerNumber = registerNoEditText.getText().toString().toUpperCase();
 
-
-        return rootView;
+                ToastUtil.showToast(getActivity(), "Registering: " + registerNumber);
+                // Intent intent = new Intent(getActivity(), );
+            }
+        });
     }
 }
