@@ -17,6 +17,7 @@ public class Student implements Parcelable {
             return new Student[size];
         }
     };
+
     private String registerNumber;
     private String fingerprint;
     private String rfid;

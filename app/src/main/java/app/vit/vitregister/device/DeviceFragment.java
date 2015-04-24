@@ -125,7 +125,7 @@ public class DeviceFragment extends Fragment {
         uploadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(getActivity(), R.string.upload_success);
+                new UploadTask(DeviceFragment.this).execute(student);
             }
         });
 
@@ -294,13 +294,13 @@ public class DeviceFragment extends Fragment {
 
     }
 
-    private void showProgressDialog(int resId) {
+    void showProgressDialog(int resId) {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getResources().getString(resId));
         progressDialog.show();
     }
 
-    private void cancelProgressDialog() {
+    void cancelProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.cancel();
             progressDialog = null;
