@@ -2,9 +2,9 @@
     <string name="app_name">VITregister</string>
 
     <!-- MainApplication -->
-    <string name="connection_success">Successful connection</string>
-    <string name="connection_fail">Connection Failed</string>
-    <string name="connection_lost">Connection is lost</string>
+    <string name="connection_success">Successfully connected to device</string>
+    <string name="connection_fail">Bluetooth connection with device has failed</string>
+    <string name="connection_lost">Bluetooth connection with device lost</string>
 
     <!-- BluetoothActivity -->
     <string name="title_bluetooth">Bluetooth Connectivity</string>
@@ -24,17 +24,30 @@
     <string name="none_paired">No devices have been paired</string>
     <string name="none_found">No devices found</string>
 
-    <!-- MainFragment -->
+    <!-- RegisterActivityFragment -->
+    <string name="title_activity_register">Register Student</string>
     <string name="label_register_no">Registration Number</string>
     <string name="label_register">Register</string>
     <string name="hint_register_no">15XXX0000</string>
 
-    <!-- FingerprintFragment -->
-    <string name="title_activity_register">Registering Student</string>
-    <string name="label_fingerprint">Get Fingerprint</string>
+    <!-- DeviceActivityFragment -->
+    <string name="title_activity_device">Registering Student</string>
+    <string name="label_fingerprint_register">Register Fingerprint</string>
+    <string name="label_fingerprint_verify">Verify Fingerprint</string>
     <string name="press_finger">Press finger</string>
     <string name="press_finger_again">Press finger again</string>
-    <string name="fingerprint_success">Fingerprint characteristics successfully generated</string>
-    <string name="fingerprint_processing">Processing Fingerprint, please wait&#8230;</string>
-    <string name="fingerprint_fail">Fingerprint registration failed</string>
+    <string name="fingerprint_register_success">Fingerprint characteristics successfully generated</string>
+    <string name="fingerprint_verify_success">Fingerprint verified</string>
+    <string name="fingerprint_verify_fail">Fingerprint verification failed</string>
+    <string name="fingerprint_processing">Processing fingerprint, please wait&#8230;</string>
+    <string name="fingerprint_processing_fail">Processing fingerprint failed</string>
+    <string name="fingerprint_register_fail">Fingerprint registration failed</string>
+    <string name="label_rfid_write">Register ID card</string>
+    <string name="rfid_writing">Registering ID card</string>
+    <string name="rfid_write_success">ID card registered</string>
+    <string name="rfid_write_fail">ID card registration failed</string>
+    <string name="label_upload">Upload data to servers</string>
+    <string name="uploading">Uploading data to servers</string>
+    <string name="upload_success">Data successfully uploaded</string>
+    <string name="upload_fail">Data upload failed</string>
 </resources>

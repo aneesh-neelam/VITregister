@@ -10,14 +10,46 @@
     <TextView
         android:id="@+id/register_no"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="28sp" />
 
     <Button
-        android:id="@+id/fingerprint_button"
+        android:id="@+id/fingerprint_register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dip"
+        android:paddingTop="20dip"
+        android:text="@string/label_fingerprint_register"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/fingerprint_verify_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:enabled="false"
+        android:paddingTop="20dip"
+        android:text="@string/label_fingerprint_verify"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/rfid_write_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="20dip"
-        android:text="@string/label_fingerprint" />
+        android:text="@string/label_rfid_write"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:enabled="false"
+        android:paddingTop="20dip"
+        android:text="@string/label_upload"
+        android:textSize="20sp" />
 
 </LinearLayout>

@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".register.RegisterActivity"
-            android:label="@string/app_name">
+            android:label="@string/title_activity_register">
         </activity>
         <activity
             android:name=".bluetooth.DeviceListActivity"
@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".device.DeviceActivity"
-            android:label="@string/title_activity_register"
+            android:label="@string/title_activity_device"
             android:parentActivityName=".register.RegisterActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
