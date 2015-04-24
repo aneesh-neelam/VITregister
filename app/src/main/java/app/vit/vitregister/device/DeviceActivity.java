@@ -1,4 +1,4 @@
-package app.vit.vitregister.activity;
+package app.vit.vitregister.device;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.vit.vitregister.MainApplication;
 import app.vit.vitregister.R;
-import app.vit.vitregister.fragment.MainFragment;
+import app.vit.vitregister.bluetooth.BluetoothActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class DeviceActivity extends AppCompatActivity {
 
     private MainApplication application;
 
@@ -23,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, BluetoothActivity.class));
         }
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_device);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainFragment())
+                    .add(R.id.container, new DeviceFragment())
                     .commit();
         }
     }
+
 }

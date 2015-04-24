@@ -1,4 +1,4 @@
-package app.vit.vitregister.fragment;
+package app.vit.vitregister.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import app.vit.vitregister.R;
-import app.vit.vitregister.activity.FingerprintActivity;
 import app.vit.vitregister.data.Student;
+import app.vit.vitregister.device.DeviceActivity;
 
-public class MainFragment extends Fragment {
+public class RegisterFragment extends Fragment {
 
     private View rootView;
     private Student student;
 
-    public MainFragment() {
+    public RegisterFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        rootView = inflater.inflate(R.layout.fragment_register, container, false);
 
         initData();
 
@@ -34,6 +34,7 @@ public class MainFragment extends Fragment {
     private void initData() {
 
         Button button = (Button) rootView.findViewById(R.id.register_button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +42,7 @@ public class MainFragment extends Fragment {
                 String registerNumber = registerNoEditText.getText().toString().toUpperCase();
 
                 student = new Student(registerNumber);
-                Intent intent = new Intent(getActivity(), FingerprintActivity.class);
+                Intent intent = new Intent(getActivity(), DeviceActivity.class);
                 intent.putExtra("student", student);
 
                 startActivity(intent);

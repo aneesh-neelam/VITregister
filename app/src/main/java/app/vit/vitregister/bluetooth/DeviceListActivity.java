@@ -1,4 +1,4 @@
-package app.vit.vitregister.activity;
+package app.vit.vitregister.bluetooth;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -47,8 +47,7 @@ public class DeviceListActivity extends Activity {
             String action = intent.getAction();
 
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                BluetoothDevice device = intent
-                        .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     mNewDevicesArrayAdapter.add(device.getName() + "\n"
                             + device.getAddress());
@@ -85,10 +84,8 @@ public class DeviceListActivity extends Activity {
         });
 
 
-        mPairedDevicesArrayAdapter = new ArrayAdapter<>(this,
-                R.layout.device_name_listitem);
-        mNewDevicesArrayAdapter = new ArrayAdapter<>(this,
-                R.layout.device_name_listitem);
+        mPairedDevicesArrayAdapter = new ArrayAdapter<>(this, R.layout.devicelist_device_item);
+        mNewDevicesArrayAdapter = new ArrayAdapter<>(this, R.layout.devicelist_device_item);
 
         ListView pairedListView = (ListView) findViewById(R.id.paired_devices);
         pairedListView.setAdapter(mPairedDevicesArrayAdapter);
@@ -116,8 +113,7 @@ public class DeviceListActivity extends Activity {
                         + device.getAddress());
             }
         } else {
-            String noDevices = getResources().getText(R.string.none_paired)
-                    .toString();
+            String noDevices = getResources().getText(R.string.none_paired).toString();
             mPairedDevicesArrayAdapter.add(noDevices);
         }
     }

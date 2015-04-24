@@ -3,36 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity$MainFragment">
+    android:orientation="vertical"
+    tools:context="app.vit.vitregister.register.RegisterFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/register_no"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:textSize="20sp"
-        android:labelFor="@+id/register_no"
-        android:text="@string/label_register_no" />
+        android:text="@string/label_register_no"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/register_no"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionSend"
         android:hint="@string/hint_register_no"
+        android:imeOptions="actionSend"
         android:inputType="text"
-        android:paddingTop="5dip"
         android:paddingLeft="10dip"
-        android:paddingRight="10dip" />
+        android:paddingRight="10dip"
+        android:paddingTop="5dip" />
 
     <Button
         android:id="@+id/register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="20dip"
         android:layout_gravity="center"
+        android:paddingTop="20dip"
         android:text="@string/label_register" />
 
 </LinearLayout>

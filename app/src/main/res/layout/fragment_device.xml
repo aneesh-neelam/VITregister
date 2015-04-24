@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    tools:context=".RegisterActivity$RegisterFragment">
+    android:orientation="vertical"
+    tools:context="app.vit.vitregister.register.RegisterFragment">
 
     <TextView
         android:id="@+id/register_no"
@@ -16,8 +16,8 @@
         android:id="@+id/fingerprint_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="20dip"
         android:layout_gravity="center"
+        android:paddingTop="20dip"
         android:text="@string/label_fingerprint" />
 
 </LinearLayout>

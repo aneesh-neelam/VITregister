@@ -1,4 +1,4 @@
-package app.vit.vitregister.fragment;
+package app.vit.vitregister.device;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,27 +22,23 @@ import app.vit.vitregister.corewise.utils.DataUtils;
 import app.vit.vitregister.corewise.utils.ToastUtil;
 import app.vit.vitregister.data.Student;
 
-public class FingerprintFragment extends Fragment {
+public class DeviceFragment extends Fragment {
 
+    private final String LOG_TAG = DeviceFragment.class.getSimpleName();
     private MainApplication application;
-
     private Student student;
     private int count;
-
     private View rootView;
     private ProgressDialog progressDialog;
-
     private AsyncFingerprint registerFingerprint;
 
-    private final String LOG_TAG = FingerprintFragment.class.getSimpleName();
-
-    public FingerprintFragment() {
+    public DeviceFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_fingerprint, container, false);
+        rootView = inflater.inflate(R.layout.fragment_device, container, false);
 
         initData();
 

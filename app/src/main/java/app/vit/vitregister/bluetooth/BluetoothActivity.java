@@ -1,15 +1,12 @@
-package app.vit.vitregister.activity;
+package app.vit.vitregister.bluetooth;
 
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,12 +14,13 @@ import app.vit.vitregister.MainApplication;
 import app.vit.vitregister.R;
 import app.vit.vitregister.corewise.logic.BluetoothChatService;
 import app.vit.vitregister.corewise.utils.ToastUtil;
+import app.vit.vitregister.register.RegisterActivity;
 
 public class BluetoothActivity extends AppCompatActivity {
 
-    private MainApplication application;
     public static final String CONNECT_RESULT = "connect_result";
     private static final int REQUEST_CONNECT_DEVICE = 1;
+    private MainApplication application;
     private Button connect;
 
     private BluetoothAdapter mBluetoothAdapter;
@@ -31,9 +29,6 @@ public class BluetoothActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private ConnectBroadcast broadcast;
-
-    public static final int CONNECTY_SUCCESS = 100;
-    public static final int CONNECTY_FAIL = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +39,7 @@ public class BluetoothActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!mBluetoothAdapter.isEnabled()) {
-                    Intent enableBtIntent = new Intent(
-                            BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBtIntent, 0);
                     return;
                 }
@@ -54,7 +48,7 @@ public class BluetoothActivity extends AppCompatActivity {
             }
         });
         initData();
-        broadcast = new ConnectBroadcast();
+        broadcast = new ConnectBroadcast(this);
         IntentFilter filter = new IntentFilter(CONNECT_RESULT);
         registerReceiver(broadcast, filter);
     }
@@ -66,7 +60,7 @@ public class BluetoothActivity extends AppCompatActivity {
     }
 
 
-    public void initData() {
+    private void initData() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
             ToastUtil.showToast(this, R.string.no_bluetooth);
@@ -75,8 +69,7 @@ public class BluetoothActivity extends AppCompatActivity {
         }
 
         if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 0);
         }
         application = (MainApplication) this.getApplicationContext();
@@ -89,18 +82,17 @@ public class BluetoothActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CONNECT_DEVICE:
                 if (resultCode == RESULT_OK) {
-                    // ToastUtil.showToast(this, R.string.enable_bluetooth);
+                    ToastUtil.showToast(this, R.string.enable_bluetooth);
                     // Get the device MAC address
                     String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
-                    // Get the BLuetoothDevice object
-                    BluetoothDevice device = mBluetoothAdapter
-                            .getRemoteDevice(address);
+                    // Get the Bluetooth Device object
+                    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
                     // Attempt to connect to the device
 
                     showProgressDialog(R.string.connecting_bluetooth);
                     mChatService.connect(device);
                     application.setChatService(mChatService);
-                    startActivity(new Intent(BluetoothActivity.this, MainActivity.class));
+                    startActivity(new Intent(BluetoothActivity.this, RegisterActivity.class));
                 } else if (resultCode == RESULT_CANCELED) {
                     ToastUtil.showToast(this, R.string.disable_bluetooth);
                 }
@@ -131,24 +123,10 @@ public class BluetoothActivity extends AppCompatActivity {
         }
     }
 
-    private void cancelProgressDialog() {
+    void cancelProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.cancel();
         }
     }
-    private class ConnectBroadcast extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            Log.i("whw", "action=" + action);
-            if(CONNECT_RESULT.equals(action)){
-                int result = intent.getIntExtra("result", 0);
-                if(result==1){
-                    BluetoothActivity.this.finish();
-                }
-                cancelProgressDialog();
-            }
-        }
 
-    }
 }

@@ -1,4 +1,4 @@
-package app.vit.vitregister.activity;
+package app.vit.vitregister.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.vit.vitregister.MainApplication;
 import app.vit.vitregister.R;
-import app.vit.vitregister.fragment.FingerprintFragment;
+import app.vit.vitregister.bluetooth.BluetoothActivity;
 
-public class FingerprintActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private MainApplication application;
 
@@ -23,13 +23,12 @@ public class FingerprintActivity extends AppCompatActivity {
             startActivity(new Intent(this, BluetoothActivity.class));
         }
 
-        setContentView(R.layout.activity_fingerprint);
+        setContentView(R.layout.activity_register);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new FingerprintFragment())
+                    .add(R.id.container, new RegisterFragment())
                     .commit();
         }
     }
-
 }
