@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import app.vit.vitregister.R;
-import app.vit.vitregister.data.Student;
+import app.vit.data.Student;
 import app.vit.vitregister.device.DeviceActivity;
 
 public class RegisterFragment extends Fragment {

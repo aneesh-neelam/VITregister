@@ -12,8 +12,8 @@ import android.widget.Button;
 
 import app.vit.vitregister.MainApplication;
 import app.vit.vitregister.R;
-import app.vit.vitregister.corewise.logic.BluetoothChatService;
-import app.vit.vitregister.corewise.utils.ToastUtil;
+import app.vit.corewise.logic.BluetoothChatService;
+import app.vit.corewise.utils.ToastUtil;
 import app.vit.vitregister.register.RegisterActivity;
 
 public class BluetoothActivity extends AppCompatActivity {

@@ -13,19 +13,19 @@ import android.widget.TextView;
 
 import app.vit.vitregister.MainApplication;
 import app.vit.vitregister.R;
-import app.vit.vitregister.corewise.asynctask.AsyncFingerprint;
-import app.vit.vitregister.corewise.asynctask.AsyncFingerprint.OnDownCharListener;
-import app.vit.vitregister.corewise.asynctask.AsyncFingerprint.OnGenCharListener;
-import app.vit.vitregister.corewise.asynctask.AsyncFingerprint.OnGetImageListener;
-import app.vit.vitregister.corewise.asynctask.AsyncFingerprint.OnMatchListener;
-import app.vit.vitregister.corewise.asynctask.AsyncFingerprint.OnRegModelListener;
-import app.vit.vitregister.corewise.asynctask.AsyncFingerprint.OnUpCharListener;
-import app.vit.vitregister.corewise.asynctask.AsyncM1Card;
-import app.vit.vitregister.corewise.asynctask.AsyncM1Card.OnWriteAtPositionListener;
-import app.vit.vitregister.corewise.logic.M1CardAPI;
-import app.vit.vitregister.corewise.utils.DataUtils;
-import app.vit.vitregister.corewise.utils.ToastUtil;
-import app.vit.vitregister.data.Student;
+import app.vit.corewise.asynctask.AsyncFingerprint;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnDownCharListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnGenCharListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnGetImageListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnMatchListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnRegModelListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnUpCharListener;
+import app.vit.corewise.asynctask.AsyncM1Card;
+import app.vit.corewise.asynctask.AsyncM1Card.OnWriteAtPositionListener;
+import app.vit.corewise.logic.M1CardAPI;
+import app.vit.corewise.utils.DataUtils;
+import app.vit.corewise.utils.ToastUtil;
+import app.vit.data.Student;
 
 public class DeviceFragment extends Fragment {
 

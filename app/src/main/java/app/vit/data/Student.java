@@ -1,4 +1,4 @@
-package app.vit.vitregister.data;
+package app.vit.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

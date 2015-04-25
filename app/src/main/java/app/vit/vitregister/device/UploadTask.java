@@ -18,10 +18,10 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 import app.vit.vitregister.R;
-import app.vit.vitregister.corewise.utils.ToastUtil;
-import app.vit.vitregister.data.Result;
-import app.vit.vitregister.data.ServerResponse;
-import app.vit.vitregister.data.Student;
+import app.vit.corewise.utils.ToastUtil;
+import app.vit.data.Result;
+import app.vit.data.ServerResponse;
+import app.vit.data.Student;
 
 public class UploadTask extends AsyncTask<Student, Void, Boolean> {
 

@@ -1,4 +1,4 @@
-package app.vit.vitregister.data;
+package app.vit.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package app.vit.vitregister.corewise.logic;
+package app.vit.corewise.logic;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
-import app.vit.vitregister.corewise.utils.DataUtils;
+import app.vit.corewise.utils.DataUtils;
 
 /**
  *
