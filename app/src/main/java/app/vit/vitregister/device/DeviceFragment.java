@@ -185,7 +185,7 @@ public class DeviceFragment extends Fragment {
             public void onUpCharSuccess(byte[] model) {
                 cancelProgressDialog();
 
-                String fingerprintHexStr = Base64.encodeToString(model, Base64.DEFAULT);
+                String fingerprintHexStr = Base64.encodeToString(model, Base64.URL_SAFE);
                 student.setFingerprint(fingerprintHexStr);
 
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_register_success);
@@ -222,7 +222,7 @@ public class DeviceFragment extends Fragment {
         verifyFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = Base64.decode(student.getFingerprint(), Base64.DEFAULT);
+                byte[] model = Base64.decode(student.getFingerprint(), Base64.URL_SAFE);
                 verifyFingerprint.PS_DownChar(model);
             }
 
