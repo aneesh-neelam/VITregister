@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import app.vit.vitregister.MainApplication;
-import app.vit.vitregister.R;
 import app.vit.corewise.asynctask.AsyncFingerprint;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnDownCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnGenCharListener;
@@ -23,9 +22,10 @@ import app.vit.corewise.asynctask.AsyncFingerprint.OnUpCharListener;
 import app.vit.corewise.asynctask.AsyncM1Card;
 import app.vit.corewise.asynctask.AsyncM1Card.OnWriteAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
-import app.vit.corewise.utils.DataUtils;
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.Student;
+import app.vit.vitregister.MainApplication;
+import app.vit.vitregister.R;
 
 public class DeviceFragment extends Fragment {
 
@@ -185,7 +185,7 @@ public class DeviceFragment extends Fragment {
             public void onUpCharSuccess(byte[] model) {
                 cancelProgressDialog();
 
-                String fingerprintHexStr = DataUtils.toHexString(model);
+                String fingerprintHexStr = Base64.encodeToString(model, Base64.DEFAULT);
                 student.setFingerprint(fingerprintHexStr);
 
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_register_success);
@@ -222,7 +222,7 @@ public class DeviceFragment extends Fragment {
         verifyFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = DataUtils.hexStringTobyte(student.getFingerprint());
+                byte[] model = Base64.decode(student.getFingerprint(), Base64.DEFAULT);
                 verifyFingerprint.PS_DownChar(model);
             }
 
