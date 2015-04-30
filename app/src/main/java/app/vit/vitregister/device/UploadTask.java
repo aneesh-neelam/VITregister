@@ -17,11 +17,11 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import app.vit.vitregister.R;
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.Result;
 import app.vit.data.ServerResponse;
 import app.vit.data.Student;
+import app.vit.vitregister.R;
 
 public class UploadTask extends AsyncTask<Student, Void, Boolean> {
 
@@ -73,7 +73,7 @@ public class UploadTask extends AsyncTask<Student, Void, Boolean> {
 
             Uri.Builder builder = new Uri.Builder()
                     .appendQueryParameter("register_number", student.getRegisterNumber())
-                    .appendQueryParameter("fingerprint", student.getFingerprint())
+                    .appendQueryParameter("fingerprint_page_id", String.valueOf(student.getFingerprintPageId()))
                     .appendQueryParameter("rfid_card_number", student.getRfid());
             String query = builder.build().getEncodedQuery();
             OutputStream os = urlConnection.getOutputStream();

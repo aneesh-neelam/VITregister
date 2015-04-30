@@ -19,17 +19,17 @@ public class Student implements Parcelable {
     };
 
     private String registerNumber;
-    private String fingerprint;
+    private int fingerprintPageId;
     private String rfid;
 
     public Student(String registerNumber) {
         this.registerNumber = registerNumber;
-        this.fingerprint = null;
+        this.fingerprintPageId = -1;
     }
 
     protected Student(Parcel in) {
         registerNumber = in.readString();
-        fingerprint = in.readString();
+        fingerprintPageId = in.readInt();
         rfid = in.readString();
     }
 
@@ -45,12 +45,12 @@ public class Student implements Parcelable {
         return registerNumber;
     }
 
-    public String getFingerprint() {
-        return fingerprint;
+    public int getFingerprintPageId() {
+        return fingerprintPageId;
     }
 
-    public void setFingerprint(String fingerprint) {
-        this.fingerprint = fingerprint;
+    public void setFingerprintPageId(int fingerprintPageId) {
+        this.fingerprintPageId = fingerprintPageId;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class Student implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(registerNumber);
-        dest.writeString(fingerprint);
+        dest.writeInt(fingerprintPageId);
         dest.writeString(rfid);
     }
 }

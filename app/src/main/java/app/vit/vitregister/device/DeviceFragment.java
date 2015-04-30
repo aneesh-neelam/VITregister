@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import app.vit.corewise.asynctask.AsyncFingerprint;
-import app.vit.corewise.asynctask.AsyncFingerprint.OnDownCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnGenCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnGetImageListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnLoadCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnMatchListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnRegModelListener;
-import app.vit.corewise.asynctask.AsyncFingerprint.OnUpCharListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnStoreCharListener;
 import app.vit.corewise.asynctask.AsyncM1Card;
 import app.vit.corewise.asynctask.AsyncM1Card.OnWriteAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
@@ -88,6 +87,7 @@ public class DeviceFragment extends Fragment {
         } else {
             student = new Student("15XXX0000");
         }
+        student.setFingerprintPageId(generatePageIdFromRegisterNumber(student.getRegisterNumber()));
 
         regNoTextView = (TextView) rootView.findViewById(R.id.register_no);
         regNoTextView.setText(student.getRegisterNumber());
@@ -136,11 +136,13 @@ public class DeviceFragment extends Fragment {
             @Override
             public void onGetImageSuccess() {
                 registerFingerprint.PS_GenChar(fingerprintCount);
+                Log.v(LOG_TAG, "onGetImageSuccess");
             }
 
             @Override
             public void onGetImageFail() {
                 registerFingerprint.PS_GetImage();
+                Log.v(LOG_TAG, "onGetImageFail");
             }
         });
 
@@ -156,12 +158,14 @@ public class DeviceFragment extends Fragment {
                     showProgressDialog(R.string.fingerprint_processing);
                     registerFingerprint.PS_RegModel();
                 }
+                Log.v(LOG_TAG, "onGenCharSuccess");
             }
 
             @Override
             public void onGenCharFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_processing_fail);
+                Log.v(LOG_TAG, "onGenCharFail");
             }
         });
 
@@ -169,37 +173,36 @@ public class DeviceFragment extends Fragment {
 
             @Override
             public void onRegModelSuccess() {
-                registerFingerprint.PS_UpChar();
+                registerFingerprint.PS_StoreChar(1, student.getFingerprintPageId());
+                Log.v(LOG_TAG, "onRegModelSuccess");
             }
 
             @Override
             public void onRegModelFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_processing_fail);
+                Log.v(LOG_TAG, "onRegModelFail");
             }
         });
 
-        registerFingerprint.setOnUpCharListener(new OnUpCharListener() {
-
+        registerFingerprint.setOnStoreCharListener(new OnStoreCharListener() {
             @Override
-            public void onUpCharSuccess(byte[] model) {
+            public void onStoreCharSuccess() {
                 cancelProgressDialog();
 
-                String fingerprintHexStr = Base64.encodeToString(model, Base64.URL_SAFE);
-                student.setFingerprint(fingerprintHexStr);
-
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_register_success);
-                Log.v(LOG_TAG, "FingerprintHexStr for " + student.getRegisterNumber() + ": " + student.getFingerprint());
 
                 fingerprintDone = true;
                 verifyFingerprintButtonCheck();
                 uploadButtonCheck();
+                Log.v(LOG_TAG, "onStoreCharSuccess");
             }
 
             @Override
-            public void onUpCharFail() {
+            public void onStoreCharFail() {
                 cancelProgressDialog();
-                ToastUtil.showToast(getActivity(), R.string.fingerprint_register_fail);
+                ToastUtil.showToast(getActivity(), R.string.fingerprint_processing_fail);
+                Log.v(LOG_TAG, "onStoreCharFail");
             }
         });
 
@@ -211,38 +214,43 @@ public class DeviceFragment extends Fragment {
                 cancelProgressDialog();
                 showProgressDialog(R.string.fingerprint_processing);
                 verifyFingerprint.PS_GenChar(1);
+                Log.v(LOG_TAG, "onGetImageSuccess");
             }
 
             @Override
             public void onGetImageFail() {
                 verifyFingerprint.PS_GetImage();
+                Log.v(LOG_TAG, "onGetImageFail");
             }
         });
 
         verifyFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = Base64.decode(student.getFingerprint(), Base64.URL_SAFE);
-                verifyFingerprint.PS_DownChar(model);
+                verifyFingerprint.PS_LoadChar(2, student.getFingerprintPageId());
+                Log.v(LOG_TAG, "onGenCharSuccess");
             }
 
             @Override
             public void onGenCharFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_processing_fail);
+                Log.v(LOG_TAG, "onGenCharFail");
             }
         });
 
-        verifyFingerprint.setOnDownCharListener(new OnDownCharListener() {
+        verifyFingerprint.setOnLoadCharListener(new OnLoadCharListener() {
             @Override
-            public void onDownCharSuccess() {
+            public void onLoadCharSuccess() {
                 verifyFingerprint.PS_Match();
+                Log.v(LOG_TAG, "onLoadCharSuccess");
             }
 
             @Override
-            public void onDownCharFail() {
+            public void onLoadCharFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_processing_fail);
+                Log.v(LOG_TAG, "onLoadCharFail");
             }
         });
 
@@ -251,12 +259,14 @@ public class DeviceFragment extends Fragment {
             public void onMatchSuccess() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_success);
+                Log.v(LOG_TAG, "onMatchSuccess");
             }
 
             @Override
             public void onMatchFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_fail);
+                Log.v(LOG_TAG, "onMatchFail");
             }
         });
 
@@ -329,6 +339,18 @@ public class DeviceFragment extends Fragment {
 
     private void verifyFingerprintButtonCheck() {
         verifyFingerprintButton.setEnabled(fingerprintDone);
+    }
+
+    private int generatePageIdFromRegisterNumber(String RegNo) {
+        int pageId = 0;
+
+        char[] reg = RegNo.toCharArray();
+        for (int i = reg.length - 1, place = 1, length = 0; i >= 0 && length < 3; --i, ++length) {
+            pageId = Integer.parseInt("" + reg[i]) * place;
+            place = place * 10;
+        }
+
+        return pageId;
     }
 
 }
