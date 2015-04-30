@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,7 @@ import app.vit.corewise.asynctask.AsyncFingerprint.OnUpCharListener;
 import app.vit.corewise.asynctask.AsyncM1Card;
 import app.vit.corewise.asynctask.AsyncM1Card.OnWriteAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
+import app.vit.corewise.utils.DataUtils;
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.Student;
 import app.vit.vitregister.MainApplication;
@@ -185,7 +185,7 @@ public class DeviceFragment extends Fragment {
             public void onUpCharSuccess(byte[] model) {
                 cancelProgressDialog();
 
-                String fingerprintHexStr = Base64.encodeToString(model, Base64.URL_SAFE);
+                String fingerprintHexStr = DataUtils.toHexString(model);
                 student.setFingerprint(fingerprintHexStr);
 
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_register_success);
@@ -222,7 +222,7 @@ public class DeviceFragment extends Fragment {
         verifyFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = Base64.decode(student.getFingerprint(), Base64.URL_SAFE);
+                byte[] model = DataUtils.hexStringTobyte(student.getFingerprint());
                 verifyFingerprint.PS_DownChar(model);
             }
 
