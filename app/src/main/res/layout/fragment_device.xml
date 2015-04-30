@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:enabled="false"
+        android:enabled="true"
         android:paddingTop="20dip"
         android:text="@string/label_fingerprint_verify"
         android:textSize="20sp" />

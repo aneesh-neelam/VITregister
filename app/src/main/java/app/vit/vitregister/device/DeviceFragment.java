@@ -342,15 +342,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private int generatePageIdFromRegisterNumber(String RegNo) {
-        int pageId = 0;
-
-        char[] reg = RegNo.toCharArray();
-        for (int i = reg.length - 1, place = 1, length = 0; i >= 0 && length < 3; --i, ++length) {
-            pageId = Integer.parseInt("" + reg[i]) * place;
-            place = place * 10;
-        }
-
-        return pageId;
+        return Integer.parseInt(RegNo.substring(RegNo.length() - 3));
     }
 
 }

@@ -73,7 +73,7 @@ public class UploadTask extends AsyncTask<Student, Void, Boolean> {
 
             Uri.Builder builder = new Uri.Builder()
                     .appendQueryParameter("register_number", student.getRegisterNumber())
-                    .appendQueryParameter("fingerprint_page_id", String.valueOf(student.getFingerprintPageId()))
+                    .appendQueryParameter("fingerprint", String.valueOf(student.getFingerprintPageId()))
                     .appendQueryParameter("rfid_card_number", student.getRfid());
             String query = builder.build().getEncodedQuery();
             OutputStream os = urlConnection.getOutputStream();
